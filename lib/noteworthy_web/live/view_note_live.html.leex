@@ -3,9 +3,10 @@
 
 
 <div>
-	<%=  @note.content %>
+	<%=  @html_content|>raw() %>
 </div>
 
 
 
-<a href=<%= "/"%>><button>Go Back</button></a>
+<a href=<%= "/"%>><button>Go Back To Your Notes</button></a>
+<a href=<%= "/notes/#{@note.id}/edit"%>><button>Edit Note</button></a>

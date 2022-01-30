@@ -1,0 +1,15 @@
+[package]
+name = "markdownparser"
+version = "0.1.0"
+authors = []
+edition = "2018"
+
+[lib]
+name = "markdownparser"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+rustler = "0.23.0"
+regex = "1"
+cargo-watch = "8.1.1"
