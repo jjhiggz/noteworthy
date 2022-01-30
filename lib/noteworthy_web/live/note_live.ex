@@ -5,7 +5,7 @@ defmodule NoteworthyWeb.NoteLive do
   alias Noteworthy.Notes.Note
 
   def mount(_params, _session, socket) do
-    {:ok, fetch(socket)}
+    {:ok, initialize(socket)}
   end
 
   def handle_event("add-note", %{"note" => note}, socket) do
@@ -25,7 +25,19 @@ defmodule NoteworthyWeb.NoteLive do
     {:noreply, fetch(socket)}
   end
 
+  def handle_event("toggle-show-create-note", _, socket) do
+    {:noreply, assign(socket, show_create_note: !socket.assigns.show_create_note)}
+  end
+
+  def handle_event("toggle-show-note-list", _, socket) do
+    {:noreply, assign(socket, show_note_list: !socket.assigns.show_note_list)}
+  end
+
   defp fetch(socket) do
     assign(socket, notes: Notes.list_notes())
+  end
+
+  defp initialize(socket) do
+    assign(socket, notes: Notes.list_notes(), show_create_note: false, show_note_list: false)
   end
 end

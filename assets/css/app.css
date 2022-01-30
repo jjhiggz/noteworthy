@@ -2,6 +2,16 @@
 @import "./phoenix.css";
 
 /* Alerts and form errors used by phx.new */
+textarea {
+  width: "100%";
+  min-height: 400px;
+  font-size: 25px;
+}
+
+input {
+  font-size: 25px;
+}
+
 .alert {
   padding: 15px;
   margin-bottom: 20px;
@@ -13,6 +23,7 @@
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
+
 .alert-warning {
   color: #8a6d3b;
   background-color: #fcf8e3;
@@ -46,12 +57,12 @@
   transition: opacity 1s ease-out;
 }
 
-.phx-loading{
+.phx-loading {
   cursor: wait;
 }
 
 .phx-modal {
-  opacity: 1!important;
+  opacity: 1 !important;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -59,7 +70,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .phx-modal-content {
@@ -84,6 +95,25 @@
   cursor: pointer;
 }
 
+a {
+  cursor: pointer;
+}
+
+.main-logo {
+  font-size: 50px;
+  font-weight: 900;
+  font-style: italic;
+  color: tomato;
+  letter-spacing: 3px;
+}
+
+.main-subtitle {
+  font-size: 20px;
+  color: tomato;
+  letter-spacing: 2px;
+  font-style: italic;
+}
+
 .fade-in-scale {
   animation: 0.2s ease-in 0s normal forwards 1 fade-in-scale-keys;
 }
@@ -99,27 +129,45 @@
   animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;
 }
 
-@keyframes fade-in-scale-keys{
-  0% { scale: 0.95; opacity: 0; }
-  100% { scale: 1.0; opacity: 1; }
+@keyframes fade-in-scale-keys {
+  0% {
+    scale: 0.95;
+    opacity: 0;
+  }
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
 }
 
-@keyframes fade-out-scale-keys{
-  0% { scale: 1.0; opacity: 1; }
-  100% { scale: 0.95; opacity: 0; }
+@keyframes fade-out-scale-keys {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+  100% {
+    scale: 0.95;
+    opacity: 0;
+  }
 }
 
-@keyframes fade-in-keys{
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+@keyframes fade-in-keys {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-@keyframes fade-out-keys{
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes fade-out-keys {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-
-
 
 .meter {
   display: flex;
@@ -128,17 +176,16 @@
   border-radius: 0.75rem;
   margin-bottom: 2rem;
   height: 4rem;
-
 }
 
 .meter span {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #faf089;
-    text-align: center;
-    white-space: nowrap;
-    font-weight: 700;
-    font-size: 1.5rem;
-    transition: width 2s ease;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #faf089;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 1.5rem;
+  transition: width 2s ease;
+}
