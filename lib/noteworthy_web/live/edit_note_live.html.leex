@@ -1,0 +1,9 @@
+<h1>Edit Note Live</h1>
+
+<form action="#" phx-submit="save-note">
+	<%= text_input :note, :title, placeholder: "Enter A Title", value: @note.title %>
+	<%= textarea :note, :content, placeholder: "Content", value: @note.content %>
+	<%= submit "Save", phx_disable_with: "Saving..." %>
+</form>
+
+<a href=<%= "/"%>><button>Go Back</button></a>

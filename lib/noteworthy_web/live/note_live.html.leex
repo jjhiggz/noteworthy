@@ -1,0 +1,11 @@
+<form action="#" phx-submit="add-note">
+	<%= text_input :note, :title, placeholder: "name your note" %>
+	<%= textarea :note, :content, placeholder: "Content" %>
+	<%= submit "Add", phx_disable_with: "Adding..." %>
+</form>
+
+<%= for note <- @notes do %>
+	<h2><%= "#{note.title}" %></h2>
+  <a href=<%="/notes/#{note.id}/edit"%>><button>edit</button></a>
+  <a href=<%="/notes/#{note.id}/view"%>><button>View As Html</button></a>
+<% end %>
