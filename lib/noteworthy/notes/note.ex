@@ -6,7 +6,7 @@ defmodule Noteworthy.Notes.Note do
     field :content, :string
     field :done, :boolean, default: false
     field :title, :string
-
+    belongs_to :user, Noteworthy.Accounts.User
     timestamps()
   end
 
