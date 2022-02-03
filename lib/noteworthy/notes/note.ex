@@ -13,7 +13,7 @@ defmodule Noteworthy.Notes.Note do
   @doc false
   def changeset(note, attrs) do
     note
-    |> cast(attrs, [:title, :content, :done])
-    |> validate_required([:title, :content, :done])
+    |> cast(attrs, [:title, :content, :user_id, :done])
+    |> validate_required([:title, :content, :done, :user_id])
   end
 end

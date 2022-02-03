@@ -7,6 +7,7 @@ defmodule Noteworthy.Accounts.User do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    field :role, :string
     has_many :note, Noteworthy.Notes.Note
 
     timestamps()
@@ -31,9 +32,10 @@ defmodule Noteworthy.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :role])
     |> validate_email()
     |> validate_password(opts)
+    |> validate_role(attrs)
   end
 
   defp validate_email(changeset) do
@@ -56,7 +58,7 @@ defmodule Noteworthy.Accounts.User do
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
   end
 
-  def changeset_role(user_or_changeset, attrs) do
+  def validate_role(user_or_changeset, attrs) do
     user_or_changeset
     |> Ecto.Changeset.cast(attrs, [:role])
     |> Ecto.Changeset.validate_inclusion(:role, ~w(user admin))

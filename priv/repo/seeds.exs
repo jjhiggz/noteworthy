@@ -24,27 +24,51 @@ Repo.delete_all(UserToken)
     password: "passwordpassword",
     role: "admin"
   })
+  |> IO.inspect()
 
 {:ok, reg_user} =
   Noteworthy.Accounts.register_user(%{
     email: "user@user.com",
     password: "passwordpassword",
-    role: "fuck"
+    role: "user"
   })
+  |> IO.inspect()
+
+{:ok, reg_user2} =
+  Noteworthy.Accounts.register_user(%{
+    email: "user2@user.com",
+    password: "passwordpassword",
+    role: "user"
+  })
+  |> IO.inspect()
 
 Repo.insert!(%Note{
-  title: "Cool Note 1",
-  content: "# This is a Cool Note",
+  title: "User 1: A Love Story",
+  content: "# Intro \n twas' a cold winter night when I first met the lovely lady",
   done: false,
   user_id: reg_user.id
 })
 
-# Repo.insert!(%Note{
-#   title: "Cool Note 2",
-#   content: "# This is also a Cool Note",
-#   done: false,
-#   user_id: reg_user.id
-# })
+Repo.insert!(%Note{
+  title: "User 2 Note",
+  content: "# Diary of a Second Class User \n - I am sad \n - I am happy \n - I am the walrus",
+  done: false,
+  user_id: reg_user2.id
+})
+
+Repo.insert!(%Note{
+  title: "User 1: A Hate Story",
+  content: "# Intro \n twas' a dark winter night when I first met the evil gent",
+  done: false,
+  user_id: reg_user.id
+})
+
+Repo.insert!(%Note{
+  title: "A Note from an Admin",
+  content: "# The laments of my day \n Being an admin is tough, nobody understandst",
+  done: false,
+  user_id: admin_user.id
+})
 
 # Repo.insert!(%Note{
 #   title: "Cool Note 3",

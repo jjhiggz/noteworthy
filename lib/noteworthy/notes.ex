@@ -5,7 +5,6 @@ defmodule Noteworthy.Notes do
 
   import Ecto.Query, warn: false
   alias Noteworthy.Repo
-
   alias Noteworthy.Notes.Note
 
   @doc """
@@ -19,6 +18,17 @@ defmodule Noteworthy.Notes do
   """
   def list_notes do
     Repo.all(Note)
+  end
+
+  def list_notes_for_user(user) do
+    query =
+      from n in Note,
+        where: n.user_id == ^user.id,
+        select: n
+
+    # select: "*
+
+    Repo.all(query)
   end
 
   @doc """

@@ -30,7 +30,9 @@
 	<h2><%= "#{note.title}" %></h2>
 	<a href=<%="/notes/#{note.id}/edit"%>><button class="">edit</button></a>
 	<a href=<%="/notes/#{note.id}/view"%> ><button>View As Html</button></a>
-	<button class="alert-danger" phx-click="delete-note" phx-value-note_id=<%= note.id %>>Delete Note</button>
+		<%= if @user.role == "admin"  do %>
+			<button class="alert-danger" phx-click="delete-note" phx-value-note_id=<%= note.id %>>Delete Note</button>
+		<% end %>
 	<% end %>
 	<% end %>
 </div>
