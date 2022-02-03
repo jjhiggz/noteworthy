@@ -4,12 +4,21 @@ defmodule NoteworthyWeb.NoteLive do
   alias Noteworthy.Notes
   alias Noteworthy.Notes.Note
 
-  def mount(_params, _session, socket) do
-    {:ok, initialize(socket)}
+  alias Noteworthy.Accounts
+
+  def mount(_params, session, socket) do
+    user = session["user_token"] |> Accounts.get_user_by_session_token()
+    {:ok, initialize(assign(socket, user: user))}
   end
 
   def handle_event("add-note", %{"note" => note}, socket) do
-    Notes.create_note(note)
+    new_note =
+      note
+      |> Map.put("user_id", socket.assigns.user.id)
+      |> IO.inspect()
+
+    Notes.create_note(new_note)
+
     {:noreply, fetch(socket)}
   end
 
@@ -20,8 +29,6 @@ defmodule NoteworthyWeb.NoteLive do
       id: note_id
     })
 
-    "note_id" |> IO.inspect()
-    note_id |> IO.inspect()
     {:noreply, fetch(socket)}
   end
 
@@ -33,11 +40,30 @@ defmodule NoteworthyWeb.NoteLive do
     {:noreply, assign(socket, show_note_list: !socket.assigns.show_note_list)}
   end
 
+  defp get_user(socket) do
+    socket.assigns.user
+  end
+
+  defp get_notes(user) do
+    case user.role do
+      "admin" -> Notes.list_notes()
+      "user" -> Notes.list_notes_for_user(user)
+      _ -> []
+    end
+  end
+
   defp fetch(socket) do
-    assign(socket, notes: Notes.list_notes())
+    user = socket.assigns.user
+    assign(socket, notes: user |> get_notes)
   end
 
   defp initialize(socket) do
-    assign(socket, notes: Notes.list_notes(), show_create_note: false, show_note_list: false)
+    user = socket.assigns.user
+
+    assign(socket,
+      notes: user |> get_notes,
+      show_create_note: false,
+      show_note_list: true
+    )
   end
 end
